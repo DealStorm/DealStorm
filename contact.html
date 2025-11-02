@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | DealStorm</title>
+
+<style>
+  :root {
+    --bg: #0d1117;          /* dark background */
+    --card-bg: #161b22;     /* slightly lighter for card */
+    --accent: #FFD166;      /* gold highlight */
+    --muted: #9fb8b6;       /* soft gray text */
+    --text: #e6e6e6;
+    --radius: 16px;
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .contact-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 30px;
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border: 1px solid #222;
+  }
+
+  .icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    background: #103C3F;
+    border-radius: 50%;
+    color: var(--accent);
+    flex: 0 0 48px;
+  }
+
+  .icon svg {
+    stroke: var(--accent);
+  }
+
+  .contact-text {
+    line-height: 1.4;
+  }
+
+  .contact-text .muted {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .contact-text a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .contact-text a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 520px) {
+    .contact-card {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      padding: 20px;
+    }
+    .icon {
+      margin-bottom: 8px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <section class="contact-card" aria-label="Contact information">
+    <div class="icon" aria-hidden="true">
+      <!-- email icon -->
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </div>
+
+    <div class="contact-text">
+      <div class="muted">Email</div>
+      <div><a href="mailto:info.Dealstorm@gmail.com">info.Dealstorm@gmail.com</a></div>
+    </div>
+  </section>
+</body>
+</html>

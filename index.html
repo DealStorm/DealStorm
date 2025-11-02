@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Deal Storm</title>
+
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card-bg: #fff;
+    --text: #111;
+    --muted: #777;
+    --accent: #ddd;
+    --radius: 12px;
+    --gap: 18px;
+  }
+
+  body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    color: var(--text);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: scale(1.02);
+  }
+  .card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  .card-body {
+    padding: 14px;
+  }
+  .card-body h2 {
+    font-size: 15px;
+    margin: 0 0 8px;
+  }
+  /* Remove blue color and underline from product links */
+  .grid a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .grid a:hover {
+    color: #103C3F; /* optional: your site’s dark teal accent */
+  }
+
+
+  /* HEADER */
+  header {
+    display: flex;
+    flex-direction: column;
+    background: #103C3F;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px 25px;
+  }
+
+  .top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 12px;
+    font-weight: 700;
+    color: #103C3F;
+    margin-bottom: 10px;
+  }
+  .site-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .brand-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+    border: 3px solid #FFD166;
+  }
+
+  .brand-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFD166;
+    letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+  .search-box {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 14px;
+    margin-top: 15px;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .icon img,
+  .social-img {
+    width: 22px;       /* size of the logo inside the circle */
+    height: 22px;
+    filter: invert(100%); /* makes the SVG white, since icons are black by default */
+    transition: opacity 0.3s ease;
+  }
+
+  .icon:hover img {
+    opacity: 0.8;  /* makes the icon slightly fade on hover */
+  }
+
+
+  .wa { background: #25D366; }
+  .tg { background: #0088cc; }
+  .yt { background: #ff0000; }
+
+  .icon:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  /* FOOTER */
+  .footer {
+    background-color: #103C3F;
+    color: #E8F0EF;
+    padding: 60px 5%;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .footer h3 {
+    color: #FFD166;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .footer p,
+  .footer a {
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .footer a:hover {
+    color: #FFD166;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
+  .social-icons a img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+    transition: 0.3s;
+  }
+
+  .social-icons a img:hover {
+    filter: invert(80%) sepia(100%) saturate(500%) hue-rotate(20deg);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #345F61;
+    margin-top: 30px;
+    padding-top: 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #9FB8B6;
+  }
+
+  .back-to-top {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 8px 14px;
+    border: 1px solid #FFD166;
+    border-radius: 6px;
+    color: #FFD166;
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .back-to-top:hover {
+    background: #FFD166;
+    color: #103C3F;
+  }
+
+  @media (max-width: 600px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .search-box input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="site-brand">
+     <img src="https://yt3.googleusercontent.com/d-Cf1SDM75fd89Zgf25hWBKRofPJWZH6snRUm63D_lZnX66vcV3I7AEoQcA_fHOu_2Z7Hv_YVA=s160-c-k-c0x00ffffff-no-rj" alt="DealStorm Logo" class="brand-logo">
+  <span class="brand-name">DealStorm</span>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search products...">
+  </div>
+
+  <nav class="social-links">
+    <a href="http://www.youtube.com/@DealxStorm" target="_blank" class="icon yt" aria-label="Youtube">
+  <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="Youtube" class="social-img">
+</a>
+    <a href="https://whatsapp.com/channel/0029VbAqUYR72WTs5oZdW43u" target="_blank" class="icon wa" aria-label="Whatsapp">
+  <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="Whatsapp" class="social-img">
+</a>
+    <a href="https://t.me/Dealxstorm" target="_blank" class="icon tg" aria-label="Telegram">
+  <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" class="social-img">
+</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Featured Products</h2>
+  <div class="grid" id="productGrid">
+
+    <a href="https://www.amazon.in/dp/B0FP9PB9WK?coliid=I30G0AJTGONSAZ&colid=159GRH7TD25CN&psc=0&linkCode=ll1&tag=hase2a7-21&linkId=b03fa3fb8e6586c02d8018750d0ca190&language=en_IN&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">
+      <div class="card" data-name="Motion Sensor Keyhole LED Light (Auto On/Off)">
+        <img src="https://m.media-amazon.com/images/I/414R0LCPqOL._SX569_.jpg" alt="">
+        <div class="card-body">
+          <h2>Motion Sensor Keyhole LED Light (Auto On/Off)</h2>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.amazon.in/ATORSETM-Compactor-Household-Supplies-Wastebaskets/dp/B0DZH91YN8?crid=169ELQJE35EE7&dib=eyJ2IjoiMSJ9.hipFYiZDnoPxs2XQSvk7M4sJjpPeA0nEdDhKCEzUaJKrwtVOqhs3tvOnp4G631dX2IUVVtHpSFoxNB2D_bQcbnY6x2nKNKAHqzI8UuOaOfzGkXa2uizzdr4OxsNg_5IUIGkXBzZ1WFlZmni88RuoVdKJm9JKCuz19WowJE6MhTqlnuRt3mSNu0ZhjIOB4cHg3P2l2olWP-VnTrqAOMYnl3vaSjJUr92PqxHaJ30OFsikKowCC5oakjfVBwVr16IQf4rWvaZx5Dnal6Yt4UcyUcwJaIw3NTUYSRHl2-XXUP4.dMUUEku8eUQSlGaUJW81reYNP_aY8mIK5gYrNA2ZdBc&dib_tag=se&keywords=manual+trash+compactor&qid=1762058738&sprefix=manual+trash+compactor%2Caps%2C282&sr=8-5&linkCode=ll1&tag=hase2a7-21&linkId=a41923ad3b17919b47a0cd7d72c3332f&language=en_IN&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">
+      <div class="card" data-name="Manual Trash Compactor Tool for Outdoor Bins">
+        <img src="https://m.media-amazon.com/images/I/411wYPvRzLL._SX569_.jpg" alt="">
+        <div class="card-body">
+          <h2>Manual Trash Compactor Tool for Outdoor Bins</h2>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.amazon.in/dp/B0F381HR1G?coliid=IBXVB74E6JYG6&colid=159GRH7TD25CN&psc=1&linkCode=ll1&tag=hase2a7-21&linkId=4b9e410811c4f92bf3877f86a8ebef98&language=en_IN&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">
+      <div class="card" data-name="Power Socket Expander with US Plug (Space-Saving Design)">
+        <img src="https://m.media-amazon.com/images/I/41HGa7DOF4L._SX569_.jpg" alt="">
+        <div class="card-body">
+          <h2>Power Socket Expander with US Plug (Space-Saving Design)</h2>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.amazon.in/dp/B0FMQ32X39?coliid=I2N5MPXV8IM8EL&colid=159GRH7TD25CN&psc=1&linkCode=ll1&tag=hase2a7-21&linkId=44293fa2491e47e0db23d497ce1f1155&language=en_IN&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">
+      <div class="card" data-name="5-Tier Rotating Acrylic Bookcase for Home & Office">
+        <img src="https://m.media-amazon.com/images/I/61BGW-EJaAL._SX569_.jpg" alt="">
+        <div class="card-body">
+          <h2>5-Tier Rotating Acrylic Bookcase for Home & Office</h2>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.amazon.in/dp/B0FMYKKBXM?coliid=I3Q6S10DXO4PLO&colid=159GRH7TD25CN&psc=1&linkCode=ll1&tag=hase2a7-21&linkId=c3777cd4b8a26a5a83a57fdfa42f0b8a&language=en_IN&ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer">
+      <div class="card" data-name="3x3 Sticky Notes Dispenser – Works with Post-it Notes">
+        <img src="https://m.media-amazon.com/images/I/61U-mo0E5XL._SY450_.jpg" alt="">
+        <div class="card-body">
+          <h2>3x3 Sticky Notes Dispenser – Works with Post-it Notes</h2>
+        </div>
+      </div>
+    </a>
+
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Deal Storm</h3>
+      <p>Helping you find the best products through trusted affiliate recommendations.</p>
+      <div class="social-icons">
+        <a href="https://whatsapp.com/channel/0029VbAqUYR72WTs5oZdW43u"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"></a>
+        <a href="https://t.me/Dealxstorm"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram"></a>
+        <a href="http://www.youtube.com/@DealxStorm"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
+      </div>
+      <a href="#top" class="back-to-top">Back to Top</a>
+    </div>
+
+    <div class="footer-section">
+      <h3>Site Map</h3>
+      <p><a href="#top">Home</a></p>
+      <p><a href="contact.html">Contact</a></p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Legal</h3>
+      <p><a href="privacy.html">Privacy Policy</a></p>
+      <p><a href="affeliate.html">Affiliate Disclosure</a></p>
+      <p><a href="mailto:info.Dealstorm@gmail.com">info.Dealstorm@gmail.com</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> DealStorm — All Rights Reserved.<br>
+    <small>As an Amazon Associate, I earn from qualifying purchases.</small>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const searchInput = document.getElementById("searchInput");
+  const products = document.querySelectorAll(".card");
+
+  searchInput.addEventListener("keyup", () => {
+    const filter = searchInput.value.toLowerCase();
+    products.forEach(p => {
+      const name = p.dataset.name.toLowerCase();
+      p.style.display = name.includes(filter) ? "flex" : "none";
+    });
+  });
+</script>
+
+</body>
+</html>
